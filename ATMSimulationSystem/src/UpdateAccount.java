@@ -243,7 +243,7 @@ public class UpdateAccount {
         System.out.println(color.cyan + "\n\t\tWelcome ," + resultSet.getString(2) + color.reset);
 
         while (true) {
-          System.out.println(color.cyan + "\n\n\t\t * | Update Details --" + color.reset);
+          System.out.println(color.cyan + "\t\t * | Update Details --" + color.reset);
           System.out.print(color.purple
               + "\n\t1. Update Name \n\t2. Update phone no \n\t3. Update dob \n\t4. Update pin \n\t5. Update Account Type \n\t6. <- Back To Home  \n  Option ->"
               + color.reset);
