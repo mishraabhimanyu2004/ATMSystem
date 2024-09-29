@@ -197,9 +197,26 @@ public class UpdateAccount {
       String query = "select account_no, name , pin from userAccount where account_no=? and pin=? ";
       PreparedStatement statement = connection.prepareStatement(query);
       System.out.println("\n\t\t*** | Account Details | *** ");
-      System.out.print("\tEnter your Account No  ->");
-      statement.setLong(1, in.nextLong());
 
+      // for checking account_no ...
+      while (true) {
+        System.out.print("\tEnter your Account No  ->");
+        String userAccountNo = in.next();
+        String regex = "^\\d{12}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(userAccountNo);
+
+        if (matcher.matches()) {
+          statement.setString(1, userAccountNo);
+          break;
+
+        } else {
+          System.out
+              .println(color.red + "\n( Note : Account Number should must contain 12 digits only ! )\n" + color.reset);
+        }
+      }
+
+      // for checking pin ....
       while (true) {
         System.out.print("\n\tEnter your Unique Pin  ->  ");
         String userPin = in.next();
@@ -215,7 +232,7 @@ public class UpdateAccount {
           break;
 
         } else {
-          System.out.println(color.red + "\n( Note : Please Follow the instruction properly ! )\n" + color.reset);
+          System.out.println(color.red + "\n(Note : Account Pin should must contain 4 digits only ! )\n" + color.reset);
         }
       }
 
