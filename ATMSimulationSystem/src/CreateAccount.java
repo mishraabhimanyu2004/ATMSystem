@@ -23,8 +23,20 @@ public class CreateAccount {
 
       // taking user name ....
       System.out.println("\n\t\t*** | -- Account Holder Details -- | *** \n\tPersonal Details -- ");
-      System.out.print("\t\tAccount Holder Name ->  ");
-      statement.setString(1, in.nextLine());
+      while(true){
+        System.out.print("\t\tAccount Holder Name ->  ");
+        String name = in.nextLine();
+        String regex = "^[a-zA-Z]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(name);
+        if (matcher.matches()) {
+          statement.setString(1, in.nextLine());
+          break;
+        } else {
+          System.out
+              .println(color.red+ "\n( Note : Special & Numberical Characters not allowing.. ! )\n" + color.reset);
+        }
+      }
 
       // Taking phone no...
       while (true) {
@@ -55,7 +67,7 @@ public class CreateAccount {
           break;
         } else {
           System.out
-              .println(color.yellow + "\n( Note :Please enter Date of Birth in proper format ! )\n" + color.reset);
+              .println(color.red + "\n( Note :Please enter Date of Birth in proper format ! )\n" + color.reset);
         }
       }
 
@@ -75,7 +87,7 @@ public class CreateAccount {
           statement.setString(4, "other");
           break;
         } else {
-          System.out.println(color.yellow + "\n( Note : Please enter proper gender ! )\n" + color.reset);
+          System.out.println(color.red + "\n( Note : Please enter proper gender ! )\n" + color.reset);
         }
       }
 
@@ -97,7 +109,7 @@ public class CreateAccount {
           break;
 
         } else {
-          System.out.println(color.yellow + "\n( Note : Please Follow the instruction properly ! )\n" + color.reset);
+          System.out.println(color.red + "\n( Note : Please Follow the instruction properly ! )\n" + color.reset);
         }
       }
 
@@ -150,7 +162,7 @@ public class CreateAccount {
           home.Home();
           break;
         } else {
-          System.out.println(color.yellow + "( Note : Please Select Yes or No only !)" + color.reset);
+          System.out.println(color.red + "( Note : Please Select Yes or No only !)" + color.reset);
         }
       }
       statement.close();
