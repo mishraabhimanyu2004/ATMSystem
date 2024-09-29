@@ -10,8 +10,7 @@ public class Main {
     while (true) {
       System.out.println(color.green + "\n\tSelect Options From Here :" + color.reset);
       System.out
-          .print("\t 1. Create New Account  \n\t 2. Update Existing Account \n\t 3. Exit Application \n\t Options : :"
-              + color.reset);
+          .print("\t 1. Create New Account  \n\t 2. Update Existing Account \n\t 3. Exit Application \n\t Options -> " + color.reset);
       int opt = in.nextInt();
       switch (opt) {
         case 1:

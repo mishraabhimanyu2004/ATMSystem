@@ -23,18 +23,17 @@ public class CreateAccount {
 
       // taking user name ....
       System.out.println("\n\t\t*** | -- Account Holder Details -- | *** \n\tPersonal Details -- ");
-      while(true){
+      while (true) {
         System.out.print("\t\tAccount Holder Name ->  ");
         String name = in.nextLine();
-        String regex = "^[a-zA-Z]+$";
+        String regex = "^[A-Za-z\\s']+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
         if (matcher.matches()) {
-          statement.setString(1, in.nextLine());
+          statement.setString(1,name);
           break;
         } else {
-          System.out
-              .println(color.red+ "\n( Note : Special & Numberical Characters not allowing.. ! )\n" + color.reset);
+          System.out.println(color.red + "\n( Note : Special & Numberical Characters not allowing.. ! )\n" + color.reset);
         }
       }
 
@@ -133,7 +132,7 @@ public class CreateAccount {
         }
       }
 
-      //get generated key for (auto incremental account no)...
+      // get generated key for (auto incremental account no)...
       int rowsAffected = statement.executeUpdate();
 
       if (rowsAffected > 0) {

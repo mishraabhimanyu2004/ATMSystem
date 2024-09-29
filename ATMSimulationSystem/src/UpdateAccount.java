@@ -17,11 +17,11 @@ public class UpdateAccount {
       while (true) {
         System.out.print("\t\tEnter New Name ->  ");
         String name = in.nextLine();
-        String regex = "^[a-zA-Z]+$";
+        String regex = "^[A-Za-z\\s']+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
         if (matcher.matches()) {
-          statement.setString(1, in.nextLine());
+          statement.setString(1, name);
           statement.setLong(2, accountNo);
           break;
         } else {
