@@ -7,6 +7,11 @@ import java.util.regex.Pattern;
 
 public class CreateAccount {
 
+  public void clean() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+  }
+
   Scanner in = new Scanner(System.in);
   ColorSet color = new ColorSet();
 
@@ -22,18 +27,20 @@ public class CreateAccount {
       PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
       // taking user name ....
-      System.out.println("\n\t\t*** | -- Account Holder Details -- | *** \n\tPersonal Details -- ");
       while (true) {
+        clean();
+        System.out.println("\n\t\t*** | -- Account Holder Details -- | *** \n\tPersonal Details -- ");
         System.out.print("\t\tAccount Holder Name ->  ");
         String name = in.nextLine();
         String regex = "^[A-Za-z\\s']+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
         if (matcher.matches()) {
-          statement.setString(1,name);
+          statement.setString(1, name);
           break;
         } else {
-          System.out.println(color.red + "\n( Note : Special & Numberical Characters not allowing.. ! )\n" + color.reset);
+          System.out
+              .println(color.red + "\n( Note : Special & Numberical Characters not allowing.. ! )\n" + color.reset);
         }
       }
 
@@ -157,6 +164,7 @@ public class CreateAccount {
           obj.createUser();
           break;
         } else if (asking.equals("n") || asking.equals("no")) {
+          clean();
           Main home = new Main();
           home.Home();
           break;

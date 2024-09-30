@@ -10,7 +10,7 @@ public class Main {
     while (true) {
       System.out.println(color.green + "\n\tSelect Options From Here :" + color.reset);
       System.out
-          .print("\t 1. Create New Account  \n\t 2. Update Existing Account \n\t 3. Exit Application \n\t Options -> " + color.reset);
+          .print("\t 1. Create New Account  \n\t 2. Update Existing Account \n\t 3. Delete Existing Account \n\t 4. Exit Application \n\t Options -> " + color.reset);
       int opt = in.nextInt();
       switch (opt) {
         case 1:
@@ -21,7 +21,12 @@ public class Main {
           UpdateAccount updateAccount = new UpdateAccount();
           updateAccount.updateUser();
           break;
+
         case 3:
+          CloseAccount closeAccount = new CloseAccount();
+          closeAccount.deleteAccount();
+          break;
+        case 4:
           System.out.println(" Exiting ...");
           System.exit(0);
 

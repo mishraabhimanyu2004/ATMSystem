@@ -3,6 +3,12 @@ import java.sql.*;
 import java.util.regex.*;
 
 public class UpdateAccount {
+
+  public void clean() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+}
+
   Scanner in = new Scanner(System.in);
   ColorSet color = new ColorSet();
 
@@ -15,6 +21,7 @@ public class UpdateAccount {
       // statement.setString(1, in.nextLine());
       // statement.setLong(2, accountNo);
       while (true) {
+        
         System.out.print("\t\tEnter New Name ->  ");
         String name = in.nextLine();
         String regex = "^[A-Za-z\\s']+$";
@@ -46,6 +53,7 @@ public class UpdateAccount {
       PreparedStatement statement = connection.prepareStatement(query);
 
       while (true) {
+        
         System.out.print("\t\tEnter New Mobile No -> ");
         String phone_no = in.next();
         String regex = "^\\d{10}$";
@@ -79,6 +87,7 @@ public class UpdateAccount {
       PreparedStatement statement = connection.prepareStatement(query);
 
       while (true) {
+       
         System.out
             .print(
                 color.yellow + "\t(Format [DD/MM/YYYY]) \n " + color.reset + "\t\tEnter New Date of Birth (DOB) -> ");
@@ -114,6 +123,7 @@ public class UpdateAccount {
       PreparedStatement statement = connection.prepareStatement(query);
 
       while (true) {
+       
         System.out.println(color.cyan
             + "\t( Note : For your security, never share your PIN or confidential information with anyone.)"
             + color.reset);
@@ -153,6 +163,7 @@ public class UpdateAccount {
       PreparedStatement statement = connection.prepareStatement(query);
 
       while (true) {
+        
         System.out.print(color.yellow + "\t( C - Current Account / S - Saving Account ) " + color.reset
             + "\n\t\tEnter New Account Type ->  ");
         String acc_type = in.next();
@@ -188,6 +199,7 @@ public class UpdateAccount {
     // name ,phone , dob , pin , acc_type .... updating
 
     try {
+      clean();
       String jdbcUrl = "jdbc:mysql://localhost:3306/ATM";
       // String DBname = "ATM";
       String username = "root";
@@ -200,7 +212,8 @@ public class UpdateAccount {
 
       // for checking account_no ...
       while (true) {
-        System.out.print("\tEnter your Account No  ->");
+      
+        System.out.print("\n\tEnter your Account No  ->");
         String userAccountNo = in.next();
         String regex = "^\\d{12}$";
         Pattern pattern = Pattern.compile(regex);
@@ -239,13 +252,14 @@ public class UpdateAccount {
       ResultSet resultSet = statement.executeQuery();
 
       if (resultSet.next()) {
+         clean();
         long account_no = resultSet.getLong(1);
-        System.out.println(color.cyan + "\n\t\tWelcome ," + resultSet.getString(2) + color.reset);
-
+        System.out.println(color.cyan + "\n\n Welcome , Dear " + resultSet.getString(2) + " ! " + color.reset);
         while (true) {
-          System.out.println(color.cyan + "\t\t * | Update Details --" + color.reset);
+           
+          System.out.println(color.cyan + "\n\t  * | Update Details --" + color.reset);
           System.out.print(color.purple
-              + "\n\t1. Update Name \n\t2. Update phone no \n\t3. Update dob \n\t4. Update pin \n\t5. Update Account Type \n\t6. <- Back To Home  \n  Option ->"
+              + "\n\t1. Update Account Holder Name \n\t2. Update Mobile No \n\t3. Update DOB \n\t4. Update Pin \n\t5. Update Account Type \n\t6. <- Back To Home  \n Option ->"
               + color.reset);
           int opt = in.nextInt();
           // creating object for UpdateAccount Class;
@@ -273,8 +287,10 @@ public class UpdateAccount {
               break;
 
             case 6:
+            clean();
               Main home = new Main();
               home.Home();
+              
               break;
 
             default:
@@ -283,7 +299,7 @@ public class UpdateAccount {
           }
         }
       } else {
-        System.out.println(color.red + "Account Not Found or Pin is Incorrect !" + color.reset);
+        System.out.println(color.red + " \t\t Account Not Found or Pin is Incorrect !" + color.reset);
         Main home = new Main();
         home.Home();
       }
